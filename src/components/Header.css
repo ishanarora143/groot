@@ -1,0 +1,33 @@
+.Header{
+    display: flex;
+    background-color: #694be2;
+    border-radius: 40px 40px 0px 0px;
+    padding: 20px 20px;
+    align-items: center;
+    z-index: 99;
+}
+.Header__displayName{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.Header__displayName1{
+    color:white;
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: 800;
+}
+.Header__displayName2{
+    color:#b9b1b1;
+    font-size: 13px;
+    margin-left: 20px;
+}
+.Header__moreOptions{
+    color: white;
+
+}
+.Header__moreOptions > svg{
+    font-size: 2rem;
+    fill:white;
+    cursor: pointer;
+}

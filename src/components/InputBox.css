@@ -1,0 +1,33 @@
+.InputBox{
+    display: flex;
+    position: fixed;
+    z-index: 999999999;
+    width: 100vw;
+    bottom: 0;
+    background-color: white;
+}
+.InputBox > input {
+    flex: 1;
+    border-radius: 20px;
+    outline-width: 0;
+    height: 30px;
+    border: none;
+    background-color: #edeff2;
+    padding: 5px 20px;
+    font-size: 18px;
+}
+.InputBox > svg {
+        fill: #5d3be6;
+     padding: 0px 10px;
+     font-size: 2rem;
+     cursor: pointer;
+
+}
+
+.poweredby{
+    align-self: center;
+    color: #5836e0;
+    padding-top: 10px;
+    margin-bottom: -20px;
+    display: flex
+}
