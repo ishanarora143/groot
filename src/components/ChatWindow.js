@@ -13,24 +13,15 @@ function ChatWindow() {
     console.log(inputRef)
     useEffect(() => {
         console.log("count2 changed!");
-        inputRef.current.scrollBy(0,200)
+        inputRef.current.scrollBy(0,500)
 
       }, [scrollBy]);
-
-    const han = ()=>{
-        console.log(inputRef.current)
-        
-        inputRef.current.scrollBy(0,scrollBy)
-    }
-    // window.scrollBy(0, 100); // Scroll 100px downwards
     console.log(messages)
-    // let messages=[]
     return (
         <div ref={inputRef}  className="ChatWindow">
             {
                 messages.map((el)=>
                 <div style={{display:'flex',flexDirection:'column'}} key={el.id}>
-                    <ChatBubble title = "Linked In" />
                     
                     {
                         el.queryText?
@@ -46,16 +37,31 @@ function ChatWindow() {
                     {
                         el.response.fulfillmentMessages?
                         el.response.fulfillmentMessages.map((message)=>
-                        message.message=="basicCard"&&
+                            
+                        message.message=="basicCard"?
                         <ChatCard 
                         title={message.basicCard.title} 
                         formattedText={message.basicCard.formattedText} 
                         img = {message.basicCard.image.imageUri}
                         button = {message.basicCard.buttons}
                          />
+                         :
+                        message.message == "suggestions"?
+                        <div className="ChatWindow__suggestions">
+                            {
+                        message.suggestions.suggestions.map((m)=>
+                            <ChatBubble title={m.title} />
+
                         )
+                            }
+                        </div>
                         :""
+                         )
+                         :""
                     }
+                         
+                        
+                            
                     </div>
                 )
             }
