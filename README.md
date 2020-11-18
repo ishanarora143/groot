@@ -1,5 +1,8 @@
 # Getting Started with Create React App
 
+The App is hosted on Heroku. You can visit the Chatbot on the link below .
+[https://groot-dialoglow-server.herokuapp.com/]
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
