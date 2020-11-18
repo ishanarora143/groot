@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 
 function ChatCard({title,formattedText,img,button}) {
     const classes = useStyles();
-    console.log('buttons', button[0].title)
+    // console.log('buttons', button[0].title)
 
     return (
         <div className="ChatCard">

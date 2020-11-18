@@ -3,6 +3,7 @@ import ChatBubbleIn from './ChatBubbleIn';
 import ChatBubbleOut from './ChatBubbleOut';
 import ChatBubbleLoading from './ChatBubbleLoading';
 import ChatBubble from './ChatBubble';
+import LinkOut from './LinkOut'
 import ChatCard from './ChatCard';
 import { useStateValue } from "../StateProvider";
 import './ChatWindow.css';
@@ -55,7 +56,13 @@ function ChatWindow() {
                         )
                             }
                         </div>
-                        :""
+                        :
+                        message.message == "linkOutSuggestion" ?
+                            <LinkOut 
+                            title={message.linkOutSuggestion.destinationName}
+                            link = {message.linkOutSuggestion.url}
+                            />
+                            :""
                          )
                          :""
                     }
