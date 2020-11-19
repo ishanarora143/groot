@@ -5,23 +5,24 @@ import ChatBubbleLoading from './ChatBubbleLoading';
 import ChatBubble from './ChatBubble';
 import LinkOut from './LinkOut'
 import ChatCard from './ChatCard';
-import { useStateValue } from "../StateProvider";
 import './ChatWindow.css';
+import { connect } from "react-redux";
+import {inputQuery} from '../actions'
 
-function ChatWindow() {
-    const [{user,messages,scrollBy,loading,inputQuery},dispatch] = useStateValue()
+
+function ChatWindow(props) {
     const inputRef = useRef(null)
     console.log(inputRef)
     useEffect(() => {
         console.log("count2 changed!");
         inputRef.current.scrollBy(0,500)
 
-      }, [scrollBy]);
-    console.log(messages)
+      }, [props.scrollBy]);
+    console.log(props.messages)
     return (
         <div ref={inputRef}  className="ChatWindow">
             {
-                messages.map((el)=>
+                props.messages.map((el)=>
                 <div style={{display:'flex',flexDirection:'column'}} key={el.id}>
                     
                     {
@@ -74,7 +75,7 @@ function ChatWindow() {
             }
             {
 
-                        loading?
+                        props.loading?
                         <>
                         <ChatBubbleOut message={inputQuery} />
 
@@ -87,5 +88,23 @@ function ChatWindow() {
         </div>
     )
 }
-
-export default ChatWindow
+const mapStateToProps = state => {
+    console.log("state",state)
+    return {
+        loading:state.loading,
+        messages:state.messages,
+        scrollBy:state.scrollBy,inputQuery:state.inputQuery
+    };
+    //   const allTodos = getTodos(state);
+    //   return {
+    //     todos:
+    //       visibilityFilter === VISIBILITY_FILTERS.ALL
+    //         ? allTodos
+    //         : visibilityFilter === VISIBILITY_FILTERS.COMPLETED
+    //           ? allTodos.filter(todo => todo.completed)
+    //           : allTodos.filter(todo => !todo.completed)
+    //   };
+  };
+export default connect(
+   mapStateToProps
+)(ChatWindow)

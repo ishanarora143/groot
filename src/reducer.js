@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { LOADING, ADD_MESSAGE} from './actionTypes';
+import { addMessage, loading} from './actions';
+
 
 
 export const initialState = {
@@ -8,25 +11,16 @@ export const initialState = {
     user:null,
     inputQuery:""
 }
-export const handleQuery=(query,dispatch)=>{
-    dispatch({
-        type:"LOADING",
-    })
+export const handleQuery=(query)=>(dispatch)=>{
+    console.log(query)
+    dispatch(loading())
     let sessionId = window.localStorage.getItem('sessionId')
     axios.post('https://groot-dialoglow-server.herokuapp.com/handleQuery',{query:query,sessionId:sessionId})
     .then((response)=>{
         if (!sessionId ){
             window.localStorage.setItem('sessionId',response.data.data.queryResult.sessionId)
         }    
-        dispatch({
-            type:"ADD_MESSAGE",
-            message:{
-                id:response.data.data.responseId,
-                queryText:response.data.data.queryResult.queryText,
-                fulfillmentText:response.data.data.queryResult.fulfillmentText,
-                response:response.data.data.queryResult
-            }
-        })
+        dispatch(addMessage(response))
     })
     .catch((err)=>{
         console.log(err)
@@ -34,14 +28,9 @@ export const handleQuery=(query,dispatch)=>{
 
 }
 
-const reducer = (state,action)=>{
+const reducer = (state=initialState,action)=>{
     console.log(state)
     switch(action.type){
-        case "ADD_TO_BASKET":
-            return {
-                ...state,
-                // basket:[...state.basket,action.item]
-            }
         
         case "ADD_MESSAGE":
             // console.log('my name is ishan arora')

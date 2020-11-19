@@ -1,16 +1,17 @@
 import React from 'react';
 import {Chip} from '@material-ui/core';
-import { useStateValue } from "../StateProvider";
+// import { useStateValue } from "../StateProvider";
 import {handleQuery} from '../reducer.js';
+import { connect } from "react-redux";
 
 
-function ChatBubble({title}) {
-  const [{user,messages},dispatch] = useStateValue()
+
+function ChatBubble({title,handleQuery}) {
 
   const handleChip = (e) =>{
     console.log(e.target.innerHTML)
 
-    handleQuery(e.target.innerHTML,dispatch)
+    handleQuery(e.target.innerHTML)
   }
     return (
         // <div>
@@ -25,5 +26,5 @@ function ChatBubble({title}) {
     )
 }
 
-export default ChatBubble
+export default connect(null,{handleQuery})(ChatBubble)
       

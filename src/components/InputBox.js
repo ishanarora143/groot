@@ -1,60 +1,59 @@
 import React ,{useState, useEffect} from 'react';
 import SendIcon from '@material-ui/icons/Send';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
-import { useStateValue } from "../StateProvider";
+// import { useStateValue } from "../StateProvider";
 import axios from 'axios';
 import {handleQuery} from '../reducer.js'
+import { connect } from "react-redux";
+import {inputQuery} from '../actions'
+
 
 import './InputBox.css'
 
 
-function InputBox() {
+function InputBox(props) {
 
     const [input,setInput] = useState('')
 
-    const [{user,messages},dispatch] = useStateValue()
 
     useEffect(()=>{
-        dispatch({
-            type:"INPUT_QUERY",
-            input:"Hi"
-        })
-        handleQuery("Hi",dispatch)
+        let e={
+            target:{value:'Hi'}
+        }
+        inputQuery(e)
+        props.handleQuery("Hi")
     },[])
 
     const inputChange=(e)=>{
         console.log(e.target.value)
         setInput(e.target.value)
-        dispatch({
-            type:"INPUT_QUERY",
-            input:e.target.value
-        })
+        props.inputQuery(e)
     }
 
     const handleKeyDown = (e)=>{
         let sessionId = window.localStorage.getItem('sessionId');
         // e.preventDefault()
         if (e.key === 'Enter') {
-            handleQuery(input,dispatch)
+            handleQuery(input)
             setInput('')  
         }
     }
 
     const handleQuery1 = ()=>{
-        handleQuery(input,dispatch)
+        handleQuery(input)
         setInput('')   
     }
 
     return (
         <div className="InputBox">
-            <EmojiObjectsIcon onClick={} />
+            <EmojiObjectsIcon  />
                 <input type="text" value={input} onChange={inputChange} onKeyDown={handleKeyDown} placeholder="Ask me something" />
             <SendIcon onClick={handleQuery1} />
 
         </div> 
 
-        
+
     )
 }
 
-export default InputBox
+export default connect(null,{inputQuery,handleQuery})(InputBox)
