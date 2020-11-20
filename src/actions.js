@@ -17,7 +17,7 @@ export const addMessage = response => ({
 });
 
 export const inputQuery = e => ({
-    type:"INPUT_QUERY",
+            type:"INPUT_QUERY",
             input:e.target.value
 });
 

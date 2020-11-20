@@ -34,7 +34,7 @@ function InputBox(props) {
         let sessionId = window.localStorage.getItem('sessionId');
         // e.preventDefault()
         if (e.key === 'Enter') {
-            handleQuery(input)
+            props.handleQuery(input)
             setInput('')  
         }
     }
@@ -55,5 +55,11 @@ function InputBox(props) {
 
     )
 }
-
-export default connect(null,{inputQuery,handleQuery})(InputBox)
+const mapDispatchToProps = dispatch => {
+    return {
+      // dispatching plain actions
+      inputQuery: (e) => dispatch(inputQuery(e)),
+      handleQuery: (query) => dispatch(handleQuery(query)),
+    }
+  }
+export default connect(null,mapDispatchToProps)(InputBox)

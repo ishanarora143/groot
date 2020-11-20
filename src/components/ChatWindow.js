@@ -77,7 +77,7 @@ function ChatWindow(props) {
 
                         props.loading?
                         <>
-                        <ChatBubbleOut message={inputQuery} />
+                        <ChatBubbleOut message={props.inputQuery} />
 
                         <ChatBubbleLoading  />
                         </>
