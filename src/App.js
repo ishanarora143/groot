@@ -1,7 +1,8 @@
-import './App.css';
-import MainWindow from './MainWindow.js';
+import "./App.css";
+import MainWindow from "./MainWindow.js";
 
-function App() {
+function App(props) {
+  // console.log(store)
   return (
     <div className="App">
       <MainWindow />
